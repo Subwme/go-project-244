@@ -1,11 +1,12 @@
 package main
 
 import (
-	"code/internal/parser"
 	"fmt"
 	"log"
 	"os"
 	"strings"
+
+	"code"
 
 	"github.com/urfave/cli/v2"
 )
@@ -40,16 +41,11 @@ func main() {
 			filepath2 := c.Args().Get(1)
 			format := c.String("format")
 
-			data1, err := parser.Parse(filepath1)
+			result, err := code.GenDiff(filepath1, filepath2, format)
 			if err != nil {
 				return err
 			}
-			data2, err := parser.Parse(filepath2)
-			if err != nil {
-				return err
-			}
-
-			fmt.Println(data1, data2, format)
+			fmt.Println(result)
 			return nil
 		},
 	}
