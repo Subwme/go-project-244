@@ -6,4 +6,4 @@
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/IO6SuaKNjocc9x77.svg)](https://asciinema.org/a/IO6SuaKNjocc9x77)
+[![asciicast](https://asciinema.org/a/r912nFRzg0gzmW0J.svg)](https://asciinema.org/a/r912nFRzg0gzmW0J)
