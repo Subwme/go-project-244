@@ -7,7 +7,8 @@
       "Bash(git push *)",
       "Bash(./bin/gendiff testdata/fixtures/file1.yml testdata/fixtures/file2.yml)",
       "Bash(git rm *)",
-      "Bash(go run *)"
+      "Bash(go run *)",
+      "Bash(golangci-lint run *)"
     ]
   }
 }
