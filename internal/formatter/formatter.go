@@ -6,13 +6,19 @@ import (
 	"code/internal/diff"
 )
 
+const (
+	FormatStylish = "stylish"
+	FormatPlain   = "plain"
+	FormatJSON    = "json"
+)
+
 func Format(nodes []diff.Node, format string) (string, error) {
 	switch format {
-	case "stylish", "":
-		return Stylish(nodes), nil
-	case "plain":
-		return Plain(nodes), nil
-	case "json":
+	case FormatStylish, "":
+		return Stylish(nodes)
+	case FormatPlain:
+		return Plain(nodes)
+	case FormatJSON:
 		return JSON(nodes)
 	default:
 		return "", fmt.Errorf("unknown format: %s", format)

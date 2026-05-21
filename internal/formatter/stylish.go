@@ -8,8 +8,8 @@ import (
 	"code/internal/diff"
 )
 
-func Stylish(nodes []diff.Node) string {
-	return formatNodes(nodes, 1)
+func Stylish(nodes []diff.Node) (string, error) {
+	return formatNodes(nodes, 1), nil
 }
 
 func formatNodes(nodes []diff.Node, depth int) string {

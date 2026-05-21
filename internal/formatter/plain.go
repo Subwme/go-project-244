@@ -7,8 +7,8 @@ import (
 	"code/internal/diff"
 )
 
-func Plain(nodes []diff.Node) string {
-	return strings.Join(formatPlainNodes(nodes, ""), "\n")
+func Plain(nodes []diff.Node) (string, error) {
+	return strings.Join(formatPlainNodes(nodes, ""), "\n"), nil
 }
 
 func formatPlainNodes(nodes []diff.Node, path string) []string {

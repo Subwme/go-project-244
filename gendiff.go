@@ -1,6 +1,8 @@
 package code
 
 import (
+	"fmt"
+
 	"code/internal/diff"
 	"code/internal/formatter"
 	"code/internal/parser"
@@ -9,11 +11,11 @@ import (
 func GenDiff(filepath1, filepath2, format string) (string, error) {
 	data1, err := parser.Parse(filepath1)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("open %s: %w", filepath1, err)
 	}
 	data2, err := parser.Parse(filepath2)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("open %s: %w", filepath2, err)
 	}
 
 	tree := diff.Build(data1, data2)

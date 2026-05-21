@@ -12,12 +12,12 @@ import (
 func Parse(filePath string) (map[string]interface{}, error) {
 	absPath, err := filepath.Abs(filePath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("resolve path %s: %w", filePath, err)
 	}
 
 	data, err := os.ReadFile(absPath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("read file %s: %w", filePath, err)
 	}
 
 	switch filepath.Ext(filePath) {
@@ -33,7 +33,7 @@ func Parse(filePath string) (map[string]interface{}, error) {
 func parseJSON(data []byte) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	if err := json.Unmarshal(data, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parse JSON: %w", err)
 	}
 	return result, nil
 }
@@ -41,7 +41,7 @@ func parseJSON(data []byte) (map[string]interface{}, error) {
 func parseYAML(data []byte) (map[string]interface{}, error) {
 	var result map[string]interface{}
 	if err := yaml.Unmarshal(data, &result); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("parse YAML: %w", err)
 	}
 	return result, nil
 }

@@ -1,45 +1,33 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"log"
 	"os"
-	"strings"
 
 	"code"
 
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 )
 
-func init() {
-	orig := cli.FlagStringer
-	cli.FlagStringer = func(f cli.Flag) string {
-		result := orig(f)
-		if _, ok := f.(*cli.StringFlag); ok {
-			result = strings.ReplaceAll(result, " value", " string")
-		}
-		return result
-	}
-}
-
 func main() {
-	app := &cli.App{
-		Name:            "gendiff",
-		Usage:           "Compares two configuration files and shows a difference.",
-		UsageText:       "gendiff [global options]",
-		HideHelpCommand: true,
+	app := &cli.Command{
+		Name:      "gendiff",
+		Usage:     "Compares two configuration files and shows a difference.",
+		UsageText: "gendiff [global options] <filepath1> <filepath2>",
+		HideHelp:  false,
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:    "format",
 				Aliases: []string{"f"},
 				Value:   "stylish",
-				Usage:   "output format",
+				Usage:   "output `format` [stylish|plain|json]",
 			},
 		},
-		Action: func(c *cli.Context) error {
-			filepath1 := c.Args().Get(0)
-			filepath2 := c.Args().Get(1)
-			format := c.String("format")
+		Action: func(ctx context.Context, cmd *cli.Command) error {
+			filepath1 := cmd.Args().Get(0)
+			filepath2 := cmd.Args().Get(1)
+			format := cmd.String("format")
 
 			result, err := code.GenDiff(filepath1, filepath2, format)
 			if err != nil {
@@ -50,7 +38,8 @@ func main() {
 		},
 	}
 
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
+	if err := app.Run(context.Background(), os.Args); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
 	}
 }
