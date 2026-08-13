@@ -19,7 +19,7 @@ make build
 ## Использование
 
 ```
-gendiff [global options] <filepath1> <filepath2>
+./bin/gendiff [global options] <filepath1> <filepath2>
 
 GLOBAL OPTIONS:
    --format format, -f format  output format [stylish|plain|json] (default: "stylish")
@@ -33,7 +33,7 @@ GLOBAL OPTIONS:
 Отображает дерево различий с отступами и знаками `+`/`-`:
 
 ```bash
-gendiff file1.json file2.json
+./bin/gendiff testdata/fixtures/file1.json testdata/fixtures/file2.json
 ```
 
 ```
@@ -52,7 +52,7 @@ gendiff file1.json file2.json
 Описывает изменения в виде читаемых предложений:
 
 ```bash
-gendiff --format plain file1.json file2.json
+./bin/gendiff --format plain testdata/fixtures/file1.json testdata/fixtures/file2.json
 ```
 
 ```
@@ -67,7 +67,7 @@ Property 'verbose' was added with value: true
 Выдаёт структурированный JSON-объект с типом каждого изменения:
 
 ```bash
-gendiff --format json file1.json file2.json
+./bin/gendiff --format json testdata/fixtures/file1.json testdata/fixtures/file2.json
 ```
 
 ```json
@@ -80,10 +80,14 @@ gendiff --format json file1.json file2.json
         "type": "unchanged",
         "value": "hexlet.io"
     },
+    "proxy": {
+        "type": "removed",
+        "value": "123.234.53.22"
+    },
     "timeout": {
-        "type": "changed",
+        "new": 20,
         "old": 50,
-        "new": 20
+        "type": "changed"
     },
     "verbose": {
         "type": "added",
