@@ -1,0 +1,12 @@
+{
+  "name": "Ivan",
+  "hobbies": ["go", "rust"],
+  "profile": {
+    "age": 25,
+    "city": "Berlin"
+  },
+  "tags": [
+    {"id": 1, "val": "admin"},
+    {"id": 2, "val": "moderator"}
+  ]
+}
